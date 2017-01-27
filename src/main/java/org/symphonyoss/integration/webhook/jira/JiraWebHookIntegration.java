@@ -18,7 +18,7 @@ package org.symphonyoss.integration.webhook.jira;
 
 import static org.symphonyoss.integration.webhook.jira.JiraEventConstants.WEBHOOK_EVENT;
 
-import com.symphony.api.pod.model.V1Configuration;
+import org.symphonyoss.integration.service.model.Configuration;
 import com.symphony.logging.ISymphonyLogger;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -70,7 +70,7 @@ public class JiraWebHookIntegration extends WebHookIntegration {
   }
 
   @Override
-  public void onConfigChange(V1Configuration conf) {
+  public void onConfigChange(Configuration conf) {
     super.onConfigChange(conf);
 
     String jiraUser = conf.getType();
