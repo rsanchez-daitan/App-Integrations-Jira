@@ -2,7 +2,7 @@
 import React from 'react';
 
 const Instructions = () => (
-  <div className='setup-instructions-content'>
+  <div>
     <h2>Step 1</h2>
     <p>Copy the URL so that you can use it later to configure the integration correctly.</p>
     <figure>
