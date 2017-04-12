@@ -127,11 +127,12 @@ public class IssueUpdatedJiraParsetTest extends JiraParserTest {
 
     JsonNode node = JsonUtils.readTree(classLoader.getResourceAsStream(EPIC_FILENAME));
 
-    String result = issueUpdated.parse(parameters, node);
+    Message result = issueUpdated.parse(parameters, node);
 
     assertNotNull(result);
 
     String expected = readFile("parser/issueUpdatedJiraParser/issueUpdatedEpicNullMessageML.xml");
-    assertEquals(expected, result);
+
+    assertEquals(expected, result.getMessage());
   }
 }
