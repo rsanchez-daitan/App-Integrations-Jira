@@ -2,14 +2,13 @@
   "applications": [
     {
       "type": "sandbox",
-      "id": "devZapierWebHookIntegration",
-      "name": "Zapier",
-      "blurb": "Zapier Webhook Integration in Development Mode",
+      "id": "devJiraWebHookIntegration",
+      "name": "Jira",
+      "blurb": "Jira Webhook Integration in Development Mode",
       "publisher": "Symphony",
-      "url": "https://d74a790c.ngrok.io/apps/jira/controller.html?configurationId=58598bffe4b057438e69f527&botUserId=346621040656489&id=devZapierWebHookIntegration&context=apps/jira",
-      "icon": "https://d74a790c.ngrok.io/apps/jira/img/appstore-logo.png",
-      "domain": ".ngrok.io"
+      "url": "https://localhost.symphony.com:4000/controller.html?configurationId=578543c2e4b0edcf4f5ff520&botUserId=7627861919706&id=devJiraWebHookIntegration",
+      "icon": "https://localhost.symphony.com:4000/img/appstore-logo.png",
+      "domain": ".symphony.com"
     }
   ]
 }
-
