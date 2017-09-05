@@ -1,4 +1,4 @@
-import { MessageEnricherBase, getUserJWT } from 'symphony-integration-commons';
+import { MessageEnricherBase, getUserJWT, authorizeUser } from 'symphony-integration-commons';
 import { commentIssue } from '../services/jiraApiCalls';
 
 const commentDialog = require('../templates/commentDialog.hbs');
@@ -12,13 +12,15 @@ const comment = 'testing the API through the FE';
 const name = 'issueState-renderer';
 const messageEvents = ['com.symphony.integration.jira.event.v2.state'];
 
-const jwt = getUserJWT();
+const accessToken = '';
+const auth = authorizeUser('https://previewjira.atlassian.net');
+auth.then(result => console.log(result));
 
 function renderComment(data) {
   const url = data.entity.issue.url;
   const issuename = data.entity.issue.key;
   return commentDialog({
-    func: commentIssue(baseUrl, issuename, url, comment, jwt),
+    func: commentIssue(baseUrl, issuename, url, comment, accessToken),
   });
 }
 
@@ -69,15 +71,19 @@ export default class IssueStateEnricher extends MessageEnricherBase {
     let dialogTemplate = null;
     switch (data.type) {
       case 'Comment':
-        dialogTemplate = renderComment(data);
+        if (auth === true) {
+          dialogTemplate = renderComment(data);
+          this.dialogsService.show('action', 'issueRendered-renderer', dialogTemplate, {}, {});
+        }
         break;
       case 'AssignTo':
         dialogTemplate = renderAssignTo(data);
+        this.dialogsService.show('action', 'issueRendered-renderer', dialogTemplate, {}, {});
         break;
       default:
         dialogTemplate = erroDialog();
+        this.dialogsService.show('action', 'issueRendered-renderer', dialogTemplate, {}, {});
         break;
     }
-    this.dialogsService.show('action', 'issueRendered-renderer', dialogTemplate, {}, {});
   }
 }
