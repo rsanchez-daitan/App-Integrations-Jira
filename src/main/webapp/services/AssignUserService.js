@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { authorizeUser, getIntegrationBaseUrl } from 'symphony-integration-commons';
 
+const dialog = require('../templates/dialog.hbs');
 const assignDialog = require('../templates/assignDialog.hbs');
 const errorDialog = require('../templates/errorDialog.hbs');
 const unexpectedErrorDialog = require('../templates/unexpectedErrorDialog.hbs');
@@ -35,10 +36,13 @@ export default class AssignUserService {
   }
 
   openAssignDialog(data) {
-    const template = assignDialog({
+    const assignTemplate = assignDialog();
+    const template = dialog({
       url: data.entity.issue.url,
       key: data.entity.issue.key,
       name: data.entity.issue.assignee.displayName,
+      actionText: 'Assign',
+      content: assignTemplate,
     });
 
     const userData = {
